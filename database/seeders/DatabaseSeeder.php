@@ -8,24 +8,27 @@ use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
 {
-    use WithoutModelEvents;
-
     /**
      * Seed the application's database.
      */
     public function run(): void
     {
-        // User::factory(10)->create();
-
-        User::factory()->create([
+        // Buat akun Admin utama
+        User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
+            'password' => bcrypt('password'),
         ]);
 
-        $stations = \App\Models\Station::factory(5)->create();
-        foreach ($stations as $station) {
-            \App\Models\FireTruck::factory(3)->create(['station_id' => $station->id]);
-            \App\Models\Incident::factory(4)->create(['station_id' => $station->id]);
-        }
+        // Opsional: Buat beberapa data Posko dasar
+        \App\Models\Posko::create([
+            'nama' => 'Posko Pusat',
+            'alamat' => 'Jl. Merdeka No. 1'
+        ]);
+
+        \App\Models\Posko::create([
+            'nama' => 'Posko Timur',
+            'alamat' => 'Jl. Sudirman No. 99'
+        ]);
     }
 }

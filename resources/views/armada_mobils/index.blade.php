@@ -1,9 +1,9 @@
 @extends('layouts.admin')
-@section('title', 'Data FireTruck')
+@section('title', 'Data ArmadaMobil')
 @section('content')
 <div class="d-sm-flex align-items-center justify-content-between mb-4">
-    <h1 class="h3 mb-0 text-gray-800">Data FireTruck</h1>
-    <a href="{{ route('fire-trucks.create') }}" class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
+    <h1 class="h3 mb-0 text-gray-800">Data ArmadaMobil</h1>
+    <a href="{{ route('armada_mobils.create') }}" class="btn btn-sm btn-primary shadow-sm"><i class="fas fa-plus fa-sm text-white-50"></i> Tambah Data</a>
 </div>
 @if(session('success')) <div class="alert alert-success">{{ session('success') }}</div> @endif
 <div class="card shadow mb-4">
@@ -13,7 +13,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
-                        <th>ID Posko</th>
+                        <th>Posko</th>
                         <th>Plat Nomor</th>
                         <th>Tipe Armada</th>
                         <th>Aksi</th>
@@ -23,12 +23,12 @@
                     @foreach($items as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
-                        <td>{{ $item->station_id }}</td>
-                        <td>{{ $item->license_plate }}</td>
-                        <td>{{ $item->type }}</td>
+                        <td>{{ $item->posko->nama ?? 'Tidak Ada' }}</td>
+                        <td>{{ $item->plat_nomor }}</td>
+                        <td>{{ $item->tipe }}</td>
                         <td>
-                            <a href="{{ route('fire-trucks.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
-                            <form action="{{ route('fire-trucks.destroy', $item->id) }}" method="POST" class="d-inline">
+                            <a href="{{ route('armada_mobils.edit', $item->id) }}" class="btn btn-warning btn-sm">Edit</a>
+                            <form action="{{ route('armada_mobils.destroy', $item->id) }}" method="POST" class="d-inline">
                                 @csrf @method('DELETE')
                                 <button type="submit" class="btn btn-danger btn-sm" onclick="return confirm('Hapus data ini?')">Hapus</button>
                             </form>

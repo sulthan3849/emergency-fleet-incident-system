@@ -3,17 +3,17 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use App\Models\Station;
-use App\Models\FireTruck;
-use App\Models\Incident;
+use App\Models\Posko;
+use App\Models\ArmadaMobil;
+use App\Models\LaporanKejadian;
 
 class DashboardController extends Controller
 {
     public function index()
     {
-        $stationCount = Station::count();
-        $fireTruckCount = FireTruck::count();
-        $incidentCount = Incident::count();
+        $stationCount = Posko::count();
+        $fireTruckCount = ArmadaMobil::count();
+        $incidentCount = LaporanKejadian::count();
 
         return view('dashboard', compact('stationCount', 'fireTruckCount', 'incidentCount'));
     }

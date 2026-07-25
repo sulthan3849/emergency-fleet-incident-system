@@ -5,10 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Station extends Model
+class Posko extends Model
 {
-    /** @use HasFactory<\Database\Factories\StationFactory> */
     use HasFactory;
 
-    protected $fillable = ['name', 'address'];
+    protected $fillable = ['nama', 'alamat'];
 }
