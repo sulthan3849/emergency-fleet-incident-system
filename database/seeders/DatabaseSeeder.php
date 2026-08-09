@@ -2,86 +2,105 @@
 
 namespace Database\Seeders;
 
-use App\Models\User;
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
+use App\Models\User;
 
 class DatabaseSeeder extends Seeder
 {
-    /**
-     * Seed the application's database.
-     */
     public function run(): void
     {
-        // Buat akun Admin utama
         User::create([
             'name' => 'Admin User',
             'email' => 'admin@example.com',
             'password' => bcrypt('password'),
         ]);
 
-        // Opsional: Buat beberapa data Posko dasar
-        $posko1 = \App\Models\Posko::create([
+        \App\Models\Posko::create([
+            'id' => 1,
             'nama' => 'Posko Pusat',
             'alamat' => 'Jl. Merdeka No. 1'
         ]);
 
-        $posko2 = \App\Models\Posko::create([
+        \App\Models\Posko::create([
+            'id' => 2,
             'nama' => 'Posko Timur',
             'alamat' => 'Jl. Sudirman No. 99'
         ]);
 
-        // Buat data Armada Mobil
-        $armada1 = \App\Models\ArmadaMobil::create([
-            'posko_id' => $posko1->id,
+        \App\Models\ArmadaMobil::create([
+            'id' => 1,
+            'posko_id' => 1,
             'tipe' => 'Mobil Pemadam Utama',
-            'plat_nomor' => 'B 1234 DAM',
+            'plat_nomor' => '23523',
             'gambar' => 'armada/fire_engine.jpg'
         ]);
 
-        $armada2 = \App\Models\ArmadaMobil::create([
-            'posko_id' => $posko1->id,
-            'tipe' => 'Mobil Tangga',
-            'plat_nomor' => 'B 5678 DAM',
-            'gambar' => 'armada/turntable_ladder.jpg'
-        ]);
-
-        $armada3 = \App\Models\ArmadaMobil::create([
-            'posko_id' => $posko2->id,
-            'tipe' => 'Ambulans',
-            'plat_nomor' => 'B 9101 AMB',
-            'gambar' => 'armada/ambulance.jpg'
-        ]);
-
-        $armada4 = \App\Models\ArmadaMobil::create([
-            'posko_id' => $posko2->id,
+        \App\Models\ArmadaMobil::create([
+            'id' => 2,
+            'posko_id' => 1,
             'tipe' => 'Truk Tangki Air',
-            'plat_nomor' => 'B 1121 AIR',
+            'plat_nomor' => '3241',
             'gambar' => 'armada/water_tender.jpg'
         ]);
 
-        $armada5 = \App\Models\ArmadaMobil::create([
-            'posko_id' => $posko1->id,
+        \App\Models\ArmadaMobil::create([
+            'id' => 4,
+            'posko_id' => 1,
+            'tipe' => 'Mobil Tangga',
+            'plat_nomor' => '2324',
+            'gambar' => 'armada/turntable_ladder.jpg'
+        ]);
+
+        \App\Models\ArmadaMobil::create([
+            'id' => 5,
+            'posko_id' => 2,
             'tipe' => 'Mobil Komando',
-            'plat_nomor' => 'B 3141 KOM',
+            'plat_nomor' => '43543',
             'gambar' => 'armada/fire_chief_car.jpg'
         ]);
 
-        // Buat data Laporan Kejadian
-        $kejadian1 = \App\Models\LaporanKejadian::create([
-            'posko_id' => $posko1->id,
-            'tanggal' => '2026-08-10',
-            'lokasi' => 'Pabrik Tekstil, Jl. Industri Barat',
+        \App\Models\ArmadaMobil::create([
+            'id' => 6,
+            'posko_id' => 2,
+            'tipe' => 'Ambulans',
+            'plat_nomor' => '5476',
+            'gambar' => 'armada/ambulance.jpg'
+        ]);
+
+        \App\Models\ArmadaMobil::create([
+            'id' => 7,
+            'posko_id' => 2,
+            'tipe' => 'Mobil Pemadam Utama',
+            'plat_nomor' => '0907',
+            'gambar' => 'armada/TEqp954j5UYVfz4ybrDCab0SBbJWULBMjQhSPoLp.jpg'
+        ]);
+
+        $k1 = \App\Models\LaporanKejadian::create([
+            'id' => 1,
+            'posko_id' => 2,
+            'tanggal' => '2026-08-20',
+            'lokasi' => 'sabang',
+            'tingkat_bahaya' => 'Rendah'
+        ]);
+        $k1->armadaMobils()->attach([5,6]);
+
+        $k2 = \App\Models\LaporanKejadian::create([
+            'id' => 2,
+            'posko_id' => 2,
+            'tanggal' => '2026-08-20',
+            'lokasi' => 'sigli',
             'tingkat_bahaya' => 'Tinggi'
         ]);
-        $kejadian1->armadaMobils()->attach([$armada1->id, $armada2->id, $armada5->id]);
+        $k2->armadaMobils()->attach([5,6]);
 
-        $kejadian2 = \App\Models\LaporanKejadian::create([
-            'posko_id' => $posko2->id,
-            'tanggal' => '2026-08-12',
-            'lokasi' => 'Perumahan Warga, Jl. Damai Raya',
-            'tingkat_bahaya' => 'Sedang'
+        $k3 = \App\Models\LaporanKejadian::create([
+            'id' => 3,
+            'posko_id' => 1,
+            'tanggal' => '2026-08-21',
+            'lokasi' => 'kamboja',
+            'tingkat_bahaya' => 'Tinggi'
         ]);
-        $kejadian2->armadaMobils()->attach([$armada3->id, $armada4->id]);
+        $k3->armadaMobils()->attach([4]);
+
     }
 }
