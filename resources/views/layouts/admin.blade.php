@@ -111,5 +111,7 @@
     <script src="{{ asset('sbadmin/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
     <!-- Custom scripts for all pages-->
     <script src="{{ asset('sbadmin/js/sb-admin-2.min.js') }}"></script>
+    @stack('scripts')
+    @yield('scripts')
 </body>
 </html>

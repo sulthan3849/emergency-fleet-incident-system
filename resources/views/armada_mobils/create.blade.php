@@ -6,7 +6,7 @@
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">
-        <form action="{{ route('armada_mobils.store') }}" method="POST">
+        <form action="{{ route('armada_mobils.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="form-group">
                 <label>Pilih Posko</label>
@@ -31,6 +31,10 @@
                     <option value="Mobil Komando">Mobil Komando</option>
                     <option value="Ambulans">Ambulans</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Gambar Mobil (Opsional)</label>
+                <input type="file" name="gambar" class="form-control" accept="image/*">
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan</button>

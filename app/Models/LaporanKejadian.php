@@ -15,4 +15,9 @@ class LaporanKejadian extends Model
     {
         return $this->belongsTo(Posko::class);
     }
+
+    public function armadaMobils()
+    {
+        return $this->belongsToMany(ArmadaMobil::class, 'armada_mobil_laporan_kejadian');
+    }
 }

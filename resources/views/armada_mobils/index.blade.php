@@ -13,6 +13,7 @@
                 <thead>
                     <tr>
                         <th>No</th>
+                        <th>Gambar</th>
                         <th>Posko</th>
                         <th>Plat Nomor</th>
                         <th>Tipe Armada</th>
@@ -23,6 +24,13 @@
                     @foreach($items as $index => $item)
                     <tr>
                         <td>{{ $index + 1 }}</td>
+                        <td>
+                            @if($item->gambar)
+                                <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Armada" class="img-thumbnail" width="100">
+                            @else
+                                <span class="badge badge-secondary">Tidak ada gambar</span>
+                            @endif
+                        </td>
                         <td>{{ $item->posko->nama ?? 'Tidak Ada' }}</td>
                         <td>{{ $item->plat_nomor }}</td>
                         <td>{{ $item->tipe }}</td>

@@ -14,6 +14,7 @@
                     <tr>
                         <th>No</th>
                         <th>Posko</th>
+                        <th>Armada yang Diutus</th>
                         <th>Tanggal Kejadian</th>
                         <th>Lokasi Kejadian</th>
                         <th>Tingkat Bahaya</th>
@@ -25,6 +26,18 @@
                     <tr>
                         <td>{{ $index + 1 }}</td>
                         <td>{{ $item->posko->nama ?? 'Tidak Ada' }}</td>
+                        <td>
+                            @forelse($item->armadaMobils as $armada)
+                                <div class="mb-1 d-flex align-items-center">
+                                    @if($armada->gambar)
+                                        <img src="{{ asset('storage/' . $armada->gambar) }}" alt="{{ $armada->tipe }}" class="img-thumbnail mr-2" style="width: 50px; height: 50px; object-fit: cover;">
+                                    @endif
+                                    <span class="badge badge-info">{{ $armada->tipe }}</span>
+                                </div>
+                            @empty
+                                <span class="text-muted small">Tidak ada armada</span>
+                            @endforelse
+                        </td>
                         <td>{{ $item->tanggal }}</td>
                         <td>{{ $item->lokasi }}</td>
                         <td>{{ $item->tingkat_bahaya }}</td>

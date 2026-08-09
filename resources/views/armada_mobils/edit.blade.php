@@ -6,7 +6,7 @@
 </div>
 <div class="card shadow mb-4">
     <div class="card-body">
-        <form action="{{ route('armada_mobils.update', $item->id) }}" method="POST">
+        <form action="{{ route('armada_mobils.update', $item->id) }}" method="POST" enctype="multipart/form-data">
             @csrf @method('PUT')
             <div class="form-group">
                 <label>Pilih Posko</label>
@@ -33,6 +33,16 @@
                     <option value="Mobil Komando" {{ $item->tipe == 'Mobil Komando' ? 'selected' : '' }}>Mobil Komando</option>
                     <option value="Ambulans" {{ $item->tipe == 'Ambulans' ? 'selected' : '' }}>Ambulans</option>
                 </select>
+            </div>
+            <div class="form-group">
+                <label>Gambar Mobil</label>
+                @if($item->gambar)
+                    <div class="mb-2">
+                        <img src="{{ asset('storage/' . $item->gambar) }}" alt="Gambar Mobil" class="img-thumbnail" width="200">
+                    </div>
+                @endif
+                <input type="file" name="gambar" class="form-control" accept="image/*">
+                <small class="form-text text-muted">Biarkan kosong jika tidak ingin mengubah gambar.</small>
             </div>
             
             <button type="submit" class="btn btn-primary">Simpan Perubahan</button>

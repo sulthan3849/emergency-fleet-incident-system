@@ -64,6 +64,8 @@
                                     <hr>
                                     <div class="text-center">
                                         <span class="small text-muted">© 2026 DAMKAR APP. All Rights Reserved.</span>
+                                        <br>
+                                        <span class="small text-info mt-2 d-inline-block">Email: <strong>admin@example.com</strong> | Password: <strong>password</strong></span>
                                     </div>
                                 </div>
                             </div>
